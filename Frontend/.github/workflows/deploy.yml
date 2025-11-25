@@ -2,22 +2,40 @@ name: Deploy Flutter Web to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master, him ]  # Added main and master for common default branches
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write  # Required for pushing to gh-pages branch
+    
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - uses: subosito/flutter-action@v2
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
           channel: stable
+          
+      - name: Get dependencies
+        run: flutter pub get
 
-      - run: flutter build web --release
+      - name: Create .env file
+        run: |
+          echo 'BASE_URL="${{ secrets.BASE_URL }}"' > .env
+      
+      - name: Build web
+        run: flutter build web --release --base-href "/${{ github.event.repository.name }}/"
+
+      - name: Add .nojekyll file
+        run: touch ./build/web/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
+          cname: false  # Set to your custom domain if you have one
