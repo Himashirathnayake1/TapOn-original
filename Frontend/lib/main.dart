@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:tap_on/Home%20page.dart';
 import 'package:tap_on/User_Home/LaunchPage.dart';
 import 'package:tap_on/constants.dart';
 
@@ -21,8 +22,8 @@ class _InitialScreenState extends State<InitialScreen> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: LaunchPage(),
-      //home: HomePage(),
+      //home: LaunchPage(),
+      home: HomePage(),
       title: appName,
       debugShowCheckedModeBanner: false,
     );

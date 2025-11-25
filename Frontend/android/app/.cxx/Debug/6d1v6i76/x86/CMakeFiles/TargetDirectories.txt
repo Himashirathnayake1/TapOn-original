@@ -1,0 +1,2 @@
+D:/Tapon Original/TapOn-original/Frontend/android/app/.cxx/Debug/6d1v6i76/x86/CMakeFiles/edit_cache.dir
+D:/Tapon Original/TapOn-original/Frontend/android/app/.cxx/Debug/6d1v6i76/x86/CMakeFiles/rebuild_cache.dir
